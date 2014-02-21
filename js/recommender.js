@@ -23,6 +23,7 @@ function compareGraphs(currentGraph, otherGraph){
 
 function compareArcs(arc,otherArc){
 	var arcComparisionScore = 0;
+	//Comparing the attributes of the arcs, if they're 
 	if(arc.traversalTime - timeRange <= otherArc.traversalTime. + timeRange){
 		arcComparisionScore++;
 	} 
@@ -43,3 +44,17 @@ function compareArcs(arc,otherArc){
 	} 
 	return arcComparisionScore;
 }
+
+
+//build array of similar graphs to our current graph
+var similiarGraphArray = [];
+for (var i = 0; i >= otherGraphs; i++) {
+	if (compareGraphs(currentGraph,otherGraphs[i])) === true){
+		similiarGraphArray.push(otherGraphs[i]);
+	}
+};
+
+//go through array of similar graphs and retrieve all the RouteAlgorithm that were computed and get their results
+for (var i = 0; i < similiarGraphArray.length; i++) {
+	similiarGraphArray[i]
+};
