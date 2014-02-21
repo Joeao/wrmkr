@@ -1,98 +1,76 @@
-
-window.start = null; 			//Start point for Linking two nodes together
+window.start = null; // Start point for Linking two nodes together
 window.setStart = false;
-window.selected = null;	//Select node as shown by gui
+window.selected = null; //Select node as shown by gui
 window.$viewer = {};
 window.allLines = [];
 window.end  = null;
 window.startDrawMarker; //Start draw marker from here
 
-
-
-$(document).ready(function(){
-    var counter = 0;
+$(document).ready(function() {
+	var counter = 0;
 	var infowindow = new google.maps.InfoWindow();
-	infowindow.close();
-
 	window.$viewer = $("#object-viewer");
 
-    var lineCounter = 0;
+	var lineCounter = 0;
+	var distance = {
+		id: lineCounter
+	};
 
-    var distance = {
-        id: lineCounter
-    }
+	infowindow.close();
 
-    //add the results in the HTML, under the map
-    var distanceMessage = document.getElementById("distance");
+	var mapOptions = {
+		zoom: 4,
+		center: new google.maps.LatLng(-33, 151),
+		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		disableDoubleClickZoom: true
+	};
 
-    var mapOptions = {
-        zoom: 4,
-        center: new google.maps.LatLng(-33, 151),
-        mapTypeId: google.maps.MapTypeId.ROADMAP,
-        disableDoubleClickZoom: true
-    }
-    var map = new google.maps.Map(document.getElementById('map_canvas'),
-        mapOptions);
-		
-		var lineSymbol = {
-			path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
-		};
+	var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
+	var lineSymbol = {
+		path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
+	};
 
-    /**
-     * On Double click, make the marker
-     */
-	 lineCounter = 0;
-    google.maps.event.addListener(map, 'dblclick', function(event) {
+	/**
+	 * On Double click, make the marker
+	 */
+	google.maps.event.addListener(map, "dblclick", function(event) {
+		var marker = new google.maps.Marker({
+			position: event.latLng,
+			map: map,
+			draggable: false,
+			id: counter,
+			node: {}, // Reference to it's parent object (so we can access it)
+			gLines: [], // Array of lines it is connected to
+			title: "Node: " + counter.toString()
+		});
 
-        var marker = new google.maps.Marker({
-            position: event.latLng,
-            map: map,
-            draggable: false,
-            id: counter,
-            node: {}, //Reference to it's parent object (so we can access it)
-            gLines: [], //Array of lines it is connected to
-            title: "Node: " + counter.toString()
-        });
-			
-
-        /**
-         * Once the marker has been clicked, either set the start for the journey
-         * or set the start or finish point for the line
-         */
-        google.maps.event.addListener(marker,"click", function(event){
-			
+		/**
+		 * Once the marker has been clicked, either set the start for the journey
+		 * or set the start or finish point for the line
+		 */
+		google.maps.event.addListener(marker, "click", function(event) {
 			setNodeSelected(this.node);
 
-			if(window.startDrawMarker != null){
+			if (window.startDrawMarker !== null) {
 				setConnect(window.startDrawMarker, this.node);
 			}
-        });
+		});
 
-
-
-        /**
+		/**
 		 * Right click function, which selects node and set it as beginning of new connection
-         */
-        google.maps.event.addListener(marker,"rightclick", function(){
+		 */
+		google.maps.event.addListener(marker, "rightclick", function() {
 			setNodeSelected(this.node);
 			$("#connect").click();
-        });
+		});
 
+		// Create new PathNode for this marker
+		node = journey.createNode(counter.toString(), marker);
 
-        // Create new PathNode for this marker
-        // node = new PathNode(counter.toString(),marker);
-        node = journey.createNode(counter.toString(), marker);
+		// Set the gMarker node to the node, so we can access it at the ui level
+		node.gMarker.node = node;
 
-        // Set the gMarker node to the node, so we can access it at the ui level
-        node.gMarker.node = node;
-		
-		// set end node
-		/*if(marker.id == 0){
-			window.end = node;
-			marker.setIcon("img/marker_end.png");
-		}(*/
-		
 		// Reset if the connect button has been clicked, now new node created
 		$("#connect").removeClass("disabled").text("Connect to...");
 		window.startDrawMarker = null;
@@ -100,18 +78,15 @@ $(document).ready(function(){
 		//Select new node
 		setNodeSelected(node);
 
-        //Increase counter, we want unique IDs for each one
-        counter++;
+		//Increase counter, we want unique IDs for each one
+		counter++;
+	});
 
-    });
-
-
-	function setConnect(nodeA,nodeB){
+	function setConnect(nodeA,nodeB) {
 		console.log('connect', nodeA, nodeB);
 
 		//If we need to connect it up
-		if (nodeA != null && nodeB != null && nodeA != nodeB){
-
+		if (nodeA !== null && nodeB !== null && nodeA != nodeB) {
 			// var nodeA, nodeB;
 			// nodeA = window.journey.findNodeByGMarker(marker1);
 			// nodeB = window.journey.findNodeByGMarker(marker2);
@@ -149,18 +124,15 @@ $(document).ready(function(){
 			});
 
 			setLineSelected(gLine);
-
 		}
 	}
-
 
 	/**
 	 * Once the marker has been clicked, either set the start for the journey
 	 * or set the start or finish point for the line
 	 */
-	 $("#connect").click(function(){
-	 
-		if (window.startDrawMarker == null) {
+	 $("#connect").click(function() {
+		if (window.startDrawMarker === null) {
 			$(this).addClass("disabled").text("Select Node");
 			window.startDrawMarker = window.selected;
 		} else {
@@ -169,33 +141,32 @@ $(document).ready(function(){
 		}
 	});
 
-
-	//Node Obj
-	function setNodeSelected(node){
-	
-		//If its an marker, set the icon back
-		if (window.selected != null && "gMarker" in window.selected) {
-			if(window.selected == window.start){
+	// Node Obj
+	function setNodeSelected(node) {
+		// If its an marker, set the icon back
+		if (window.selected !== null && "gMarker" in window.selected) {
+			if (window.selected == window.start) {
 				window.selected.gMarker.setIcon("img/marker_start.png");
 			}
-			else if(window.selected == window.end){
+			else if (window.selected == window.end) {
 				window.selected.gMarker.setIcon("img/marker_end.png");
 			}
-			else{
+			else {
 				window.selected.gMarker.setIcon("img/marker_intermediate.png");
 			}
 		}
 		//If its a line, change the colour
-		if (window.selected != null && "pathOrder" in window.selected){
+		if (window.selected !== null && "pathOrder" in window.selected){
 			window.selected.setOptions({strokeColor: '#333333'});
 		}
+
 		window.selectedType = 'node';
 		window.selected = node;
 		
-		$("#set_start").removeClass("inactive")
-		
+		$("#set_start").removeClass("inactive");
+
 		// If end node disable set start button
-		if(window.end == window.selected){
+		if (window.end == window.selected) {
 			$("#set_start").addClass("inactive");
 		}
 
@@ -203,19 +174,17 @@ $(document).ready(function(){
 
 		// Set selected title heading
 		$("h4",window.$viewer).text("Node:" + node.id);
-		if(window.selected == window.start){
+		if (window.selected == window.start) {
 			$("h4",window.$viewer).text("Node:" + node.id + " (Start)");
 		}
-		else if(window.selected == window.end)
-		{
+		else if(window.selected == window.end) {
 			$("h4",window.$viewer).text("Node:" + node.id + " (End)");
 		}
 
 		longLat  = node.gMarker.getPosition().lng() + ", "+ node.gMarker.getPosition().lat();
-		
-	
-			node.gMarker.setIcon("img/marker_selected.png");
-		
+
+		node.gMarker.setIcon("img/marker_selected.png");
+
 		// No hazards added to nodes
 		//$(".modal-body").show();
 		//buildHazardsUI(node.hazards);
@@ -233,19 +202,20 @@ $(document).ready(function(){
 		console.log('lineeeeee', line);
 
 		//If its an marker, set the icon back
-		if (window.selected != null && "gMarker" in window.selected) {
-			if(window.selected == window.start){
+		if (window.selected !== null && "gMarker" in window.selected) {
+			if (window.selected == window.start) {
 				window.selected.gMarker.setIcon("img/marker_start.png");
 			}
-			else if(window.selected == window.end){
+			else if (window.selected == window.end) {
 				window.selected.gMarker.setIcon("img/marker_end.png");
 			}
-			else{
+			else {
 				window.selected.gMarker.setIcon("img/marker_intermediate.png");
 			}
 		}
+
 		//If its a line, change the colour
-		if (window.selected != null && "pathOrder" in window.selected){
+		if (window.selected !== null && "pathOrder" in window.selected) {
 			window.selected.setOptions({strokeColor: '#333333'});
 		}
 
@@ -270,36 +240,32 @@ $(document).ready(function(){
 		$("#set_start",window.$viewer).hide();
 		$("#delete",window.$viewer).show();
 		$(".modal-body").show();
-
 	}
 	
 	$("#set_start").click(function(){
 		console.log("Set start node id: " + window.selected.id);
-		
+
 		//Reset previous node
-		if (window.start != null) {
+		if (window.start !== null) {
 			window.start.gMarker.setIcon("img/marker_intermediate.png");
 		}
-		
+
 		//Set new node
 		window.start = window.selected;
 		window.selected.gMarker.setIcon("img/marker_start.png");
 		$("h4",window.$viewer).text("Node:" + node.id + " (Start)");
-		
+
 		// utils setup
 		window.setStart = true;
 		journey.setStartNode(window.selected);
 	});
 
 	// Adding new hazard
-	$("#hazard_add").click(function(){
-
+	$("#hazard_add").click(function() {
 		name = $("#hazard_name").val();
 		
-		if(name != "")
-		{
+		if(name !== "") {
 			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
-
 
 			$("span.add-on",inputCopy).text(name).attr("id",name);
 
@@ -312,25 +278,24 @@ $(document).ready(function(){
 				updateHazards();
 			});
 
-
 			//PathNode.prototype.setPathHazards
 			updateHazards();
 		}
 	});
 		
 	//Delete line button clicked
-	$("#delete").click(function(){
-		if (window.selected != null && "pathOrder" in window.selected){
+	$("#delete").click(function() {
+		if (window.selected !== null && "pathOrder" in window.selected) {
 			connectedNodeA = window.selected.pathOrder[0];  
-            connectedNodeB = window.selected.pathOrder[1];
-			
+			connectedNodeB = window.selected.pathOrder[1];
+
 			console.log("Deleted connection between nodes " + connectedNodeA.id + " and " + connectedNodeB.id);
-                                                
-            //Disconnect the nodes
-            window.journey.disconnectNodes(connectedNodeA, connectedNodeB); 
-                                                
-            //Remove the line from the map
-            window.selected.setMap(null);
+
+			//Disconnect the nodes
+			window.journey.disconnectNodes(connectedNodeA, connectedNodeB); 
+
+			//Remove the line from the map
+			window.selected.setMap(null);
 			window.selected = null;
 			$(".modal-body").hide();
 			$("#delete",window.$viewer).hide();
@@ -343,72 +308,61 @@ $(document).ready(function(){
 		$('#data').empty();
 	});
 
-
 	//Simulate clicked, begin travel
-	$("#start").click(function(){
-		if(window.start != null){
+	$("#start").click(function() {
+		if(window.start !== null) {
 			window.journey.start();
 		}
-		else{
+		else {
 			window.alert("Error: Must set a start node to simulate");
 		}
 	});
 
-		// live on change handler as the input boxes aren't
-		// always on the page
-		$(document).on('change', '.hazard input', function() {
-			updateHazards();
-		})
+	// live on change handler as the input boxes aren't
+	// always on the page
+	$(document).on('change', '.hazard input', function() {
+		updateHazards();
+	});
 
-		function updateHazards(){
-			newhazards = {};
-			$(".hazard").each(function(){
+	function updateHazards(){
+		newhazards = {};
+		$(".hazard").each(function(){
 
-				name = $("span",this).text();
-				value = $("input",this).val();
+			name = $("span",this).text();
+			value = $("input",this).val();
 
-				newhazards[name] = value;
-			});
+			newhazards[name] = value;
+		});
 
-			console.log('update hazards', window.selectedType, window.selected, newhazards);
+		console.log('update hazards', window.selectedType, window.selected, newhazards);
 
-			if (window.selectedType == 'path') {
-				var startNode = window.selected.pathOrder[0];
-				var endNode = window.selected.pathOrder[1];
-				console.log('update LINE hazards', window.selected, startNode, endNode);
-				startNode.setPathHazards(endNode, newhazards);
-			}
-			else {
-				// handle updating node hazards...
-				console.log('this is a NODENODENODENODENODE!!!', window.selected);
-				window.selected.setHazards(newhazards);
-			}
-
+		if (window.selectedType == 'path') {
+			var startNode = window.selected.pathOrder[0];
+			var endNode = window.selected.pathOrder[1];
+			console.log('update LINE hazards', window.selected, startNode, endNode);
+			startNode.setPathHazards(endNode, newhazards);
+		}
+		else {
+			// handle updating node hazards...
+			console.log('this is a NODENODENODENODENODE!!!', window.selected);
+			window.selected.setHazards(newhazards);
 		}
 
+	}
 
+	function buildHazardsUI(hazards) {
+		console.log('Loaded attributes ', hazards);
 
+		$("#attributes").html("");
+		$.each(hazards, function(key, value) {
+			name = $("#hazard_name").val();
 
-		function buildHazardsUI(hazards) {
+			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
-			console.log('Loaded attributes ', hazards);
-			$("#attributes").html("");
-			$.each(hazards, function(key, value) {
-				name = $("#hazard_name").val();
+			$("span.add-on",inputCopy).text(key).attr("id",key);
+			$("input",inputCopy).val(value);
 
-				inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
-
-				$("span.add-on",inputCopy).text(key).attr("id",key);
-				$("input",inputCopy).val(value);
-
-				$("#attributes").append(inputCopy);
-
-			});
-		}
-
+			$("#attributes").append(inputCopy);
+		});
+	}
 });
-
-
-
-
-
