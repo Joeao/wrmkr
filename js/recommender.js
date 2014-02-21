@@ -2,7 +2,7 @@ var timeRange = 10;
 var dangerRange = 10;
 var terrainRange  = 10;
 var arcSimularityRange = 10;
-graphMinimumComparisionScore = 10;
+var graphMinimumComparisionScore = 10;
 
 function compareGraphs(currentGraph, otherGraph){
 	currentArcs = currentGraph.arcs;
