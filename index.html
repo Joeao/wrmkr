@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>DSTL - Web app</title>
+<link rel="stylesheet" href="css/bootstrap.css" type="text/css">
+<link rel="stylesheet" href="css/dstl.css" type="text/css">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js" type="text/javascript"></script>
+
+<script src="js/underscore-min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/gmaps.dstl.js"></script>
+<script src="js/mediators.dstl.js"></script>
+<script src="js/utils.dstl.js"></script>
+
+
+</head>
+<body>
+
+
+
+	<div id="map_canvas"></div>
+
+
+
+<!-- Modal (Class show needs to be hide to enable close etc -->
+<div id="object-viewer" class="object modal hide" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+    <h4>Object Title</h4>
+    <h5>Object Details</h5>
+
+  </div>
+
+  <!-- Modal Body -->
+  <div class="modal-body">
+
+
+
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#home" data-toggle="tab"><i class="icon-th-list"></i>&nbsp;Attributes</a></li>
+		</ul>
+
+
+
+
+		<div class="tab-content">
+		  <div class="tab-pane active attributes" id="home">
+
+
+
+		  	<div id="form" class="hide">
+				<div class="input-prepend">
+				  <span class="add-on"></span>
+				  <input class="span1" id="prependedInput" type="text" >
+				</div>
+				  <button class="add-on btn btn-mini btn-danger" type="button">&times;</button>
+			 </div>
+
+			 <div id="attributes"> </div>
+
+
+
+			 <!-- New Attribute -->
+			<div class="new-attribute input-append">
+			  <input id="hazard_name" class="span2" id="appendedInputButton" type="text"  placeholder="Name">
+			  <button id="hazard_add" class="btn btn-primary" type="button">Add</button>
+			</div>
+		  </div>
+		</div>
+
+
+
+  </div>
+  <div class="modal-footer">
+    <button id="connect" class="btn">Connect to..</button>
+    <button id="delete" class="btn btn-inverse">Delete</button>
+	<button  id="set_start" class="btn btn-success">Set Start</a>
+  </div>
+</div>
+
+
+
+
+
+	<!-- Global and reporting controls -->
+	<div class="accordion global" id="accordion">
+		<div class="accordion-group">
+			<div class="accordion-heading">
+			<h4>DSTL WarMakr <span class="label label-warning">beta</span></h4>
+
+
+
+				<a id="accordionToggle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+					<i class="icon-resize-vertical"></i>
+				</a>
+						
+
+			</div>
+			<div id="collapseOne" class="accordion-body collapse in">
+				<div class="accordion-inner">
+					<div class="output">
+						<h4>Output</h4>
+						
+							<a id="start" href="#" class="btn btn-success">Simulate</a>
+							<a id="clear" href="#" class="btn btn-inverse">Clear</a>
+
+						<script id="template" type="template"><p><%= data %></p></script>
+						<pre id="data" class="data"> </pre>
+
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+  	</div>
+
+
+
+
+
+
+
+
+</body>
+</html>

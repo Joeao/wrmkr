@@ -1,0 +1,102 @@
+html, body, #map_canvas {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+	width: 100%;
+	position: relative;
+}
+
+#map_canvas {
+	background: #CBCBF8;
+	position: relative;
+}
+
+
+/* Object Modal Window */
+.modal.object {
+	position: absolute;
+	left: inherit;
+	top: 5px !important;
+	right: 5px;
+	width: 230px;
+}
+.modal.object h4 {
+	margin: 0px;
+}
+.modal.object h5 {
+	margin: 0px;
+	font-weight: normal;
+	color: #949494;
+	font-size: 9px;
+}
+.modal.object .nav-tabs a {
+	padding: 4px 8px;
+}
+.modal.object .input-prepend {
+	float: left;
+	clear:both;
+}
+.modal.object .input-prepend .add-on {
+	width: 100px;
+	text-align: left;
+}
+.modal.object .attributes .btn-danger {
+	float: left;
+	margin: 3px 0px 0px 5px;
+}
+.modal.object .new-attribute {
+	clear:both;
+	padding-top: 5px;
+	border-top: 1px solid #EEE;
+}
+
+.modal.object .new-attribute input {
+	width: 135px;
+}
+.modal.object .inactive {opacity: 0.7;box-shadow: inset 0px 0px 13px #303030;}
+.modal.object .btn-toolbar {float: left; margin:0px;}
+
+
+/* Global Modal Windows */
+.accordion.global {
+	max-height: 99%;
+	position: absolute;
+	top: inherit;
+	bottom: 0px;
+	left: 0px;
+	width: 300px;
+	border-bottom: 0px;
+	border-radius: 5px 5px 0px 0px;
+	background: #FFF;
+	margin:0px;
+}
+.accordion.global .accordion-group {
+	padding: 5px;
+}
+.accordion.global h4 {
+	float: left;
+}
+.accordion.global .accordion-toggle {float:right;}
+.accordion.global .accordion-body {clear:both;}
+
+
+/* Controls */
+.accordion.global .accordion-inner {padding:5px; padding-top:10px;}
+
+#start, #clear{
+	float:right;
+	margin:2px;
+}
+
+/* Output */
+.accordion.global .output {float: left; margin-left:0px;}
+.accordion.global .output pre {
+	clear:both;
+	float: left;
+}
+.accordion.global .data{
+	max-height:600px;
+	min-height:80px;
+	overflow: scroll;
+	width: 260px;
+}
