@@ -10,11 +10,11 @@ function compareGraphs(currentGraph, otherGraph){
 	//compare each arc of currentGraph with each arc of otherGraph
 	//if enough are similar then consider the graph's similar
 	graphComparisionScore = 0;
-	for ( var i = 0; i < currentArcs.length; i++){
-		for (var j = 0; j < otherArcs.length; j++ ){
-			graphComparisionScore = graphComparisionScore + compareArcs(currentArcs[i],otherArcs[j]);			
-		}
-	}
+	currentArcs.forEach(function(arc){
+		otherArcs.forEach(functon(otherArc){
+			graphComparisionScore = graphComparisionScore + compareArcs(arc,otherArc);
+		})
+	})
 	if (graphComparisionScore > graphMinimumComparisionScore){
 		return true;
 	}
@@ -24,13 +24,13 @@ function compareGraphs(currentGraph, otherGraph){
 function compareArcs(arc,otherArc){
 	var arcComparisionScore = 0;
 	//Comparing the attributes of the arcs, if they're 
-	if(arc.traversalTime - timeRange <= otherArc.traversalTime. + timeRange){
+	if(arc.traversalTime - timeRange <= otherArc.traversalTime + timeRange){
 		arcComparisionScore++;
 	} 
-	else if(arc.traversalTime - timeRange >= otherArc.traversalTime. + timeRange){
+	else if(arc.traversalTime - timeRange >= otherArc.traversalTime + timeRange){
 		arcComparisionScore++;
 	} 
-	if (arc.dangerRating - dangerRange <= otherArc.dangerRange + dangeRange){
+	if (arc.dangerRating - dangerRange <= otherArc.dangerRange + dangerRange){
 		arcComparisionScore++;
 	}	
 	else if(arc.dangerRating - timeRange >= otherArc.dangerRating. + timeRange){
@@ -48,9 +48,9 @@ function compareArcs(arc,otherArc){
 
 //build array of similar graphs to our current graph
 var similiarGraphArray = [];
-for (var i = 0; i >= otherGraphs; i++) {
-	if (compareGraphs(currentGraph,otherGraphs[i])) === true){
-		similiarGraphArray.push(otherGraphs[i]);
+otherGraphs.forEach(function(graph){
+	if (compareGraphs(currentGraph,graph) === true){
+		similiarGraphArray.push(graph);
 	}
 };
 
