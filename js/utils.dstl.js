@@ -56,6 +56,7 @@ $(function() {
             if (currentHazards.hasOwnProperty(name)) {
                 var xpp = Mediate(name, currentHazards, pathHazards, currentHazards[name], value);
                 // console.log('xpp', name, value, xpp);
+
                 if (_.isObject(xpp)) {
                     calculatedPathHazards = _.defaults(calculatedPathHazards, xpp);
                 }

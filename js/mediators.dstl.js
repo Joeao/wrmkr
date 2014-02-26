@@ -1,4 +1,4 @@
-Mediate = function(name, valueSoFar, currentValue, allHazards, pathHazards) {
+Mediate = function(name, allHazards, pathHazards, valueSoFar, currentValue) {
 	var mediators = {
 
 		/**
