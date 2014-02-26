@@ -55,7 +55,7 @@ $(function() {
         _.each(pathHazards, function(value, name) {
             if (currentHazards.hasOwnProperty(name)) {
                 var xpp = Mediate(name, currentHazards, pathHazards, currentHazards[name], value);
-                console.log('xpp', name, value, xpp);
+                // console.log('xpp', name, value, xpp);
                 if (_.isObject(xpp)) {
                     calculatedPathHazards = _.defaults(calculatedPathHazards, xpp);
                 }
@@ -68,7 +68,7 @@ $(function() {
             }
         }, this);
 
-        console.log('calculatedPathHazards', calculatedPathHazards, currentHazards);
+        // console.log('calculatedPathHazards', calculatedPathHazards, currentHazards);
 
         // NODE HAZARDS ARE NOT CALCULATED!!!
 
@@ -106,17 +106,17 @@ $(function() {
         xx =  _.first(_.where(this.allNodes, {
             gMarker: gMarker
         }));
-        console.log('xx', xx);
+        // console.log('xx', xx);
         return xx;
     };
 
     Journey.prototype.nodesConnected = function(nodeA, nodeB) {
-        console.log('connected?', nodeA, nodeB);
+        // console.log('connected?', nodeA, nodeB);
         return nodeA.id == nodeB.id || nodeA.successors[nodeB.id] || nodeB.successors[nodeA.id];
     };
 
     Journey.prototype.connectNodes = function(nodeFrom, nodeTo, hazards) {
-        console.log('connecting', nodeFrom, nodeTo);
+        // console.log('connecting', nodeFrom, nodeTo);
         if (this.nodesConnected(nodeFrom, nodeTo)) {
             return false;
         }
@@ -144,7 +144,7 @@ $(function() {
 
         this.completedPaths.push(details);
 
-        console.log('one path complete!', journey, hazards);
+        // console.log('one path complete!', journey, hazards);
 
         ui = new UI();
         ui.render(details, this.completedPaths);
@@ -192,7 +192,7 @@ $(function() {
         this.display('Least number of nodes:<br>');
         var least = null;
         _.each(allCompletedPaths, function(path) {
-            console.log('path here', path);
+            // console.log('path here', path);
             if (least === null || path.journey.length < least.journey.length) {
                 least = path;
             }
@@ -217,13 +217,13 @@ $(function() {
                     lowest = path;
                 }
             }, this);
-            console.log(hazard_name, lowest);
+            // console.log(hazard_name, lowest);
             this.display(this.parse_path(lowest));
         }, this);
     };
 
     UI.prototype.parse_path = function(path) {
-        console.log('path', path);
+        // console.log('path', path);
         return '<b>'+_.pluck(path.journey, 'id')+'</b> ' + JSON.stringify(path.hazards);
     };
 });

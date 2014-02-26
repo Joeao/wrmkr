@@ -83,7 +83,7 @@ $(document).ready(function() {
 	});
 
 	function setConnect(nodeA,nodeB) {
-		console.log('connect', nodeA, nodeB);
+		// console.log('connect', nodeA, nodeB);
 
 		//If we need to connect it up
 		if (nodeA !== null && nodeB !== null && nodeA != nodeB) {
@@ -199,7 +199,7 @@ $(document).ready(function() {
 	//setting line as selecetd, update object viewer
 	//gLine obj
 	function setLineSelected(line){
-		console.log('lineeeeee', line);
+		// console.log('lineeeeee', line);
 
 		//If its an marker, set the icon back
 		if (window.selected !== null && "gMarker" in window.selected) {
@@ -243,7 +243,7 @@ $(document).ready(function() {
 	}
 	
 	$("#set_start").click(function(){
-		console.log("Set start node id: " + window.selected.id);
+		// console.log("Set start node id: " + window.selected.id);
 
 		//Reset previous node
 		if (window.start !== null) {
@@ -287,7 +287,7 @@ $(document).ready(function() {
 			connectedNodeA = window.selected.pathOrder[0];  
 			connectedNodeB = window.selected.pathOrder[1];
 
-			console.log("Deleted connection between nodes " + connectedNodeA.id + " and " + connectedNodeB.id);
+			// console.log("Deleted connection between nodes " + connectedNodeA.id + " and " + connectedNodeB.id);
 
 			//Disconnect the nodes
 			window.journey.disconnectNodes(connectedNodeA, connectedNodeB); 
@@ -332,23 +332,23 @@ $(document).ready(function() {
 			newhazards[name] = value;
 		});
 
-		console.log('update hazards', window.selectedType, window.selected, newhazards);
+		// console.log('update hazards', window.selectedType, window.selected, newhazards);
 
 		if (window.selectedType == 'path') {
 			var startNode = window.selected.pathOrder[0];
 			var endNode = window.selected.pathOrder[1];
-			console.log('update LINE hazards', window.selected, startNode, endNode);
+			// console.log('update LINE hazards', window.selected, startNode, endNode);
 			startNode.setPathHazards(endNode, newhazards);
 		} else {
 			// handle updating node hazards...
-			console.log('this is a NODENODENODENODENODE!!!', window.selected);
+			// console.log('this is a NODENODENODENODENODE!!!', window.selected);
 			window.selected.setHazards(newhazards);
 		}
 
 	}
 
 	function buildHazardsUI(hazards) {
-		console.log('Loaded attributes ', hazards);
+		// console.log('Loaded attributes ', hazards);
 
 		$("#attributes").html("");
 		$.each(hazards, function(key, value) {
