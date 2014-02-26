@@ -1,6 +1,3 @@
-var timeRange = 10;
-var dangerRange = 10;
-var terrainRange  = 10;
 var arcSimularityRange = 10;
 var graphMinimumComparisionScore = 10;
 
@@ -24,24 +21,9 @@ function compareGraphs(currentGraph, otherGraph){
 function compareArcs(arc,otherArc){
 	var arcComparisionScore = 0;
 	//Comparing the attributes of the arcs, if they're 
-	if(arc.traversalTime - timeRange <= otherArc.traversalTime + timeRange){
-		arcComparisionScore++;
-	} 
-	else if(arc.traversalTime - timeRange >= otherArc.traversalTime + timeRange){
-		arcComparisionScore++;
-	} 
-	if (arc.dangerRating - dangerRange <= otherArc.dangerRange + dangerRange){
-		arcComparisionScore++;
-	}	
-	else if(arc.dangerRating - timeRange >= otherArc.dangerRating. + timeRange){
-		arcComparisionScore++;
-	} 
-	if (arc.terrainRating - terrainRange <= otherArc.terrainRating + terrainRange){
-		arcComparisionScore++;
-	} 	
-	else if(arc.terrainRating - timeRange >= otherArc.terrainRating. + timeRange){
-		arcComparisionScore++;
-	} 
+	
+
+
 	return arcComparisionScore;
 }
 
@@ -55,6 +37,8 @@ otherGraphs.forEach(function(graph){
 };
 
 //go through array of similar graphs and retrieve all the RouteAlgorithm that were computed and get their results
-for (var i = 0; i < similiarGraphArray.length; i++) {
-	similiarGraphArray[i]
-};
+similiarGraphArray.forEach(function(graph){
+	retrieveRoutesThroughGraph(graph).forEach(function(path){
+		console.log("success");
+	})
+})
