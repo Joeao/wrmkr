@@ -39,6 +39,18 @@ html, body, #map_canvas {
 		padding: 4px 8px;
 	}
 
+	#attributes {
+		margin-top:10px;
+	}
+
+		#attributes .input-group {
+			margin-top:5px;
+		}
+
+			#attributes .input-group span.attr-name {
+				width:100px;
+			}
+
 	.modal.object .new-attribute {
 		clear:both;
 		padding-top: 5px;
