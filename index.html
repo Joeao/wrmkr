@@ -20,45 +20,46 @@
 	<div id="map_canvas"></div>
 		<!-- Modal (Class show needs to be hide to enable close etc -->
 		<div id="object-viewer" class="object modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4>Object Title</h4>
-				<h5>Object Details</h5>
-			</div>
-
-			<!-- Modal Body -->
-			<div class="modal-body">
-				<ul class="nav nav-tabs">
-				 	<li class="active"><a href="#home" data-toggle="tab"><i class="icon-th-list"></i>&nbsp;Attributes</a></li>
-				</ul>
-				<div class="tab-content">
-				 	<div class="tab-pane active attributes" id="home">
-
-					  	<div id="form" class="hide">
-							<div class="input-group">
-							 	<span class="input-group-addon attr-name"></span>
-							 	<input class="form-control" id="prependedInput" type="text" >
-							 	<span class="input-group-addon btn-danger">&times;</button>
-							</div>
-						 </div>
-
-						 <div id="attributes"> </div>
-						 <!-- New Attribute -->
-						<div class="new-attribute input-group">
-						 	<input id="hazard_name" class="span2 form-control" id="appendedInputButton" type="text"  placeholder="Name">
-						 	<button id="hazard_add" class="btn btn-primary" type="button">Add</button>
-						</div>
-				 	</div>
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4>Object Title</h4>
+					<h5>Object Details</h5>
 				</div>
 
+				<!-- Modal Body -->
+				<div class="modal-body">
+					<ul class="nav nav-tabs">
+					 	<li class="active"><a href="#home" data-toggle="tab"><i class="icon-th-list"></i>&nbsp;Attributes</a></li>
+					</ul>
+					<div class="tab-content">
+					 	<div class="tab-pane active attributes" id="home">
+
+						  	<div id="form" class="hide">
+								<div class="input-group">
+								 	<span class="input-group-addon attr-name"></span>
+								 	<input class="form-control" id="prependedInput" type="text" />
+								 	<span class="input-group-addon btn-danger">&times;</span>
+								</div>
+							 </div>
+
+							 <div id="attributes"> </div>
+							 <!-- New Attribute -->
+							<div class="new-attribute input-group">
+							 	<input id="hazard_name" class="span2 form-control" id="appendedInputButton" type="text"  placeholder="Name" />
+							 	<button id="hazard_add" class="btn btn-primary" type="button">Add</button>
+							</div>
+					 	</div>
+					</div>
+
+				</div>
+				<div class="modal-footer">
+					<button id="connect" class="btn btn-default">Connect to..</button>
+					<button id="delete" class="btn btn-danger">Delete</button>
+					<button id="set_start" class="btn btn-success">Set Start</button>
+					</div>
+
 			</div>
-			<div class="modal-footer">
-				<button id="connect" class="btn btn-default">Connect to..</button>
-				<button id="delete" class="btn btn-danger">Delete</button>
-				<button  id="set_start" class="btn btn-success">Set Start</button>
-			</div>
-		</div>
 		</div>
 
 		<!-- Global and reporting controls -->
