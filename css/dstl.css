@@ -23,6 +23,7 @@ html, body, #map_canvas {
 	top: 5px !important;
 	right: 5px;
 	width: 240px;
+	bottom:auto;
 }
 	.modal.object h4 {
 		margin: 0px;

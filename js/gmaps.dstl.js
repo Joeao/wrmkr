@@ -272,13 +272,11 @@ $(document).ready(function() {
 			$("#attributes").append(inputCopy);
 			$("#hazard_name").val("");
 
-			//TODO: Could be .on("click") ~ Live
-			$("#attributes .btn-danger").click(function(){
+			$("#attributes .btn-danger").on('click', function(){
 				$(this).parent().remove();
 				updateHazards();
 			});
 
-			//PathNode.prototype.setPathHazards
 			updateHazards();
 		}
 	});
