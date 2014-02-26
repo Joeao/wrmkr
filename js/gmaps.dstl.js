@@ -301,7 +301,7 @@ $(document).ready(function(){
 			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
 
-			$("span.add-on",inputCopy).text(name).attr("id",name);
+			$("span.input-group-addon",inputCopy).text(name).attr("id",name);
 
 			$("#attributes").append(inputCopy);
 			$("#hazard_name").val("");
@@ -398,7 +398,7 @@ $(document).ready(function(){
 
 				inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
-				$("span.add-on",inputCopy).text(key).attr("id",key);
+				$("span.input-group-addon",inputCopy).text(key).attr("id",key);
 				$("input",inputCopy).val(value);
 
 				$("#attributes").append(inputCopy);
