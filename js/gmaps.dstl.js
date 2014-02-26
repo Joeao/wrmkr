@@ -326,7 +326,7 @@ $(document).ready(function() {
 		newhazards = {};
 		$(".hazard").each(function(){
 
-			name = $("span",this).text();
+			name = $(".attr-name",this).text();
 			value = $("input",this).val();
 
 			newhazards[name] = value;
