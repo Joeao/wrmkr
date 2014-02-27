@@ -23,7 +23,6 @@ html, body, #map_canvas {
 	top: 5px !important;
 	right: 5px;
 	width: 240px;
-	bottom:auto;
 }
 	.modal.object h4 {
 		margin: 0px;
@@ -134,4 +133,9 @@ html, body, #map_canvas {
 	min-height:80px;
 	overflow: scroll;
 	width: 260px;
+}
+.scrollable-menu {
+    height: auto;
+    max-height: 10em;
+    overflow-x: hidden;
 }
