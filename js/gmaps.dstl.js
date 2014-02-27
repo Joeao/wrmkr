@@ -260,11 +260,22 @@ $(document).ready(function() {
 		journey.setStartNode(window.selected);
 	});
 
+	// Dropdown menu for hazards
+	$(".dropdown-menu li").click(function(event){
+		var $target = $( event.currentTarget );
+ 
+		$target.closest( '.btn-group' )
+				.find( '[data-bind="label"]' ).text( $target.text() )
+				.end()
+				.children( '.dropdown-toggle' ).dropdown( 'toggle' );
+		 
+		return false;
+	})
 	// Adding new hazard
 	$("#hazard_add").click(function() {
-		name = $("#hazard_name").val();
+		name = $("#hazard_name").text().toLowerCase();
 		
-		if(name !== "") {
+		if(name !== "" || name !== "Select Hazard") {
 			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
 			$(".attr-name",inputCopy).text(name).attr("id",name);
@@ -315,6 +326,11 @@ $(document).ready(function() {
 			window.alert("Error: Must set a start node to simulate");
 		}
 	});
+	//save button clicked
+	$("#save").click(function() {
+		
+	});
+
 
 	// live on change handler as the input boxes aren't
 	// always on the page
