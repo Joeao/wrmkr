@@ -274,24 +274,32 @@ $(document).ready(function() {
 	// Adding new hazard
 	$("#hazard_add").click(function() {
 		name = $("#hazard_name").text().toLowerCase();
-		
-		if(name !== "" || name !== "Select Hazard") {
+		if(!ExistingHazard(name)) {
 			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
 			$(".attr-name",inputCopy).text(name).attr("id",name);
 
 			$("#attributes").append(inputCopy);
-			$("#hazard_name").val("");
 
 			$("#attributes .btn-danger").on('click', function(){
-				$(this).parent().remove();
+				$(this).parent().parent().remove();
 				updateHazards();
 			});
 
 			updateHazards();
 		}
 	});
-		
+
+	function ExistingHazard(hazard){
+		var existing=false;
+		$("#attributes .attr-name").each(function(index,element){
+			if ($( this ).text() === hazard){
+				existing = true;
+			}
+		});
+		return existing;
+	}
+
 	//Delete line button clicked
 	$("#delete").click(function() {
 		if (window.selected !== null && "pathOrder" in window.selected) {

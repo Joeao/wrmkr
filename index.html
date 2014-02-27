@@ -38,15 +38,41 @@
 								<div class="input-group">
 								 	<span class="input-group-addon attr-name"></span>
 								 	<input class="form-control" id="prependedInput" type="text" />
+								 	<span class="input-group-addon btn-danger">&times;</span>
 								</div>
 							 </div>
 
 							 <div id="attributes"> </div>
 							 <!-- New Attribute -->
-							<div class="new-attribute input-group">
-							 	<input id="hazard_name" class="span2 form-control" id="appendedInputButton" type="text"  placeholder="Name" />
-							 	<button id="hazard_add" class="btn btn-primary" type="button">Add</button>
+
+							<div class="new-attribute input-group">	
+
+								<div class="btn-group btn-input clearfix">
+								  <button type="button" class="btn btn-default dropdown-toggle form-control" data-toggle="dropdown">
+								    <span id="hazard_name" data-bind="label">Select Hazard</span> <span class="caret"></span>
+								  </button>
+								  <ul class="scrollable-menu dropdown-menu" role="menu">
+								    <li><a href="#">Mountain</a></li>
+								    <li><a href="#">Fog</a></li>
+								    <li><a href="#">Oxygen</a></li>
+								    <li><a href="#">Cars</a></li>
+								    <li><a href="#">Camouflage</a></li>
+								    <li><a href="#">Rain</a></li>
+								    <li><a href="#">Cars</a></li>
+								    <li><a href="#">Forest</a></li>
+								    <li><a href="#">Bears</a></li>
+								    <li><a href="#">Men</a></li>
+								    <li><a href="#">Water</a></li>
+								    <li><a href="#">Grenades</a></li>
+								    <li><a href="#">Boats</a></li>
+								    <li><a href="#">Sharks</a></li>
+								    <li><a href="#">Wind</a></li>
+								  </ul>
+								</div>
+								<button id="hazard_add" class="btn btn-primary" type="button">Add</button>
 							</div>
+							
+
 					 	</div>
 					</div>
 
