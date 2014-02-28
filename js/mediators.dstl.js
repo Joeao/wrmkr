@@ -43,7 +43,7 @@ Mediate = function(name, allHazards, pathHazards, valueSoFar, currentValue) {
 					ratio = 0.2;
 				if (currentValue > 3000) // >3000 miles
 					ratio = 0.1;
-				if (currentValue > 3500) // >3000 miles
+				if (currentValue > 3500) // >3500 miles
 					ratio = 0;
 			   
 				return {
