@@ -1,0 +1,46 @@
+{
+	"hazards": {
+		"mountain": {
+			"value": 50
+		},
+		"fog": {
+			"value": 50
+		},
+		"oxygen": {
+			"value": 50
+		},
+		"cars": {
+			"value": 50
+		},
+		"camouflage": {
+			"value": 50
+		},
+		"rain": {
+			"value": 50
+		},
+		"forest": {
+			"value": 50
+		},
+		"bears": {
+			"value": 50
+		},
+		"men": {
+			"value": 50
+		},
+		"water": {
+			"value": 50
+		},
+		"grenades": {
+			"value": 50
+		},
+		"boats": {
+			"value": 50
+		},
+		"sharks": {
+			"value": 50
+		},
+		"wind": {
+			"value": 50
+		}
+	}
+}
