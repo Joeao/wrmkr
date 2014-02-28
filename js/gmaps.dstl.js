@@ -334,10 +334,6 @@ $(document).ready(function() {
 			window.alert("Error: Must set a start node to simulate");
 		}
 	});
-	//save button clicked
-	$("#save").click(function() {
-		
-	});
 
 
 	// live on change handler as the input boxes aren't
