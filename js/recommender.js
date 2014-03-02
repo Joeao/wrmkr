@@ -3,71 +3,46 @@ Recommender = function(journey, options) {
 		this.options = this.extend(this.options, options);
 
 	this.journey = journey;
+
+	// Handle async fetch
+	this.fetchRecommendedValues(this.recommend.bind(this));
 };
 
 Recommender.prototype.options = {
-	recommendedValues: {
-		danger: {
-			value: 5,
-			weighting: 5
-		},
-		mountain: {
-			value: 5,
-			weighting: 5
-		},
-		fog: {
-			value: 5,
-			weighting: 5
-		},
-		rain: {
-			value: 5,
-			weighting: 5
-		},
-		forest: {
-			value: 5,
-			weighting: 5
-		},
-		water: {
-			value: 5,
-			weighting: 5
-		},
-		oxygen: {
-			value: 5,
-			weighting: 5
-		},
-		cars: {
-			value: 5,
-			weighting: 5
-		},
-		camouflage: {
-			value: 5,
-			weighting: 5
-		},
-		bears: {
-			value: 5,
-			weighting: 5
-		},
-		men: {
-			value: 5,
-			weighting: 5
-		},
-		grenades: {
-			value: 5,
-			weighting: 5
-		},
-		boats: {
-			value: 5,
-			weighting: 5
-		},
-		sharks: {
-			value: 5,
-			weighting: 5
-		},
-		wind: {
-			value: 5,
-			weighting: 5
-		}
+	weightings: {
+		danger: 5,
+		mountain: 5,
+		fog: 5,
+		rain: 5,
+		forest: 5,
+		water: 5,
+		oxygen: 5,
+		cars: 5,
+		camouflage: 5,
+		bears: 5,
+		men: 5,
+		grenades: 5,
+		boats: 5,
+		sharks: 5,
+		wind: 5
 	}
+};
+
+Recommender.prototype.fetchRecommendedValues = function(callback) {
+	if (this.recommendedValues) return;
+
+	var self = this;
+
+	$.ajax({
+		url: 'config.json',
+		success: function(data) {
+			self.recommendedValues = data.hazards;
+			callback(self);
+		},
+		error: function(err) {
+			throw new Error('Err: Recommended values fetch failed');
+		}
+	});
 };
 
 Recommender.prototype.recommend = function() {
@@ -94,8 +69,8 @@ Recommender.prototype.recommendPath = function(path) {
 };
 
 Recommender.prototype.calculateHazard = function(hazard) {
-	var recommendedValue = this.options.recommendedValues[hazard.name].value
-	,	weighting = this.options.recommendedValues[hazard.name].weighting
+	var recommendedValue = this.recommendedValues[hazard.name].value
+	,	weighting = this.options.weightings[hazard.name]
 	;
 
 	return (Math.abs(recommendedValue - hazard.value)) * weighting;
