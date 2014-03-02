@@ -52,7 +52,7 @@ Recommender.prototype.recommend = function() {
 		path.hazardValue = self.recommendPath(path);
 	});
 
-	this.keySort(this.journey.completedPaths);
+	this.sort(this.journey.completedPaths);
 };
 
 Recommender.prototype.recommendPath = function(path) {
@@ -76,7 +76,7 @@ Recommender.prototype.calculateHazard = function(hazard) {
 	return (Math.abs(recommendedValue - hazard.value)) * weighting;
 };
 
-Recommender.prototype.keySort = function(arr) {
+Recommender.prototype.sort = function(arr) {
 	arr.sort(function(a, b) {
 		a = a.hazardValue;
 		b = b.hazardValue;
