@@ -30,19 +30,54 @@ Recommender.prototype.options = {
 		water: {
 			value: 5,
 			weighting: 5
+		},
+		oxygen: {
+			value: 5,
+			weighting: 5
+		},
+		cars: {
+			value: 5,
+			weighting: 5
+		},
+		camouflage: {
+			value: 5,
+			weighting: 5
+		},
+		bears: {
+			value: 5,
+			weighting: 5
+		},
+		men: {
+			value: 5,
+			weighting: 5
+		},
+		grenades: {
+			value: 5,
+			weighting: 5
+		},
+		boats: {
+			value: 5,
+			weighting: 5
+		},
+		sharks: {
+			value: 5,
+			weighting: 5
+		},
+		wind: {
+			value: 5,
+			weighting: 5
 		}
 	}
 };
 
 Recommender.prototype.recommend = function() {
-	var self = this
-	,	rank = []
-	;
+	var self = this;
 
 	this.journey.completedPaths.forEach(function(path) {
-		var hazardValue = self.recommendPath(path);
-		rank[hazardValue] = path;
+		path.hazardValue = self.recommendPath(path);
 	});
+
+	this.keySort(this.journey.completedPaths);
 };
 
 Recommender.prototype.recommendPath = function(path) {
@@ -64,6 +99,15 @@ Recommender.prototype.calculateHazard = function(hazard) {
 	;
 
 	return (Math.abs(recommendedValue - hazard.value)) * weighting;
+};
+
+Recommender.prototype.keySort = function(arr) {
+	arr.sort(function(a, b) {
+		a = a.hazardValue;
+		b = b.hazardValue;
+
+		return a - b;
+	});
 };
 
 Recommender.prototype.extend = function(orig, extra) {
