@@ -146,6 +146,9 @@ $(function() {
         this.completedPaths.push(details);
 
         // console.log('one path complete!', journey, hazards);
+        window.recommender = recommender = new Recommender(this);
+        recommender.recommend();
+
 
         ui = new UI();
         ui.render(details, this.completedPaths);

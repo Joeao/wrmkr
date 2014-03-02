@@ -1,44 +1,73 @@
-var arcSimularityRange = 10;
-var graphMinimumComparisionScore = 10;
+Recommender = function(journey, options) {
+	if (options)
+		this.options = this.extend(this.options, options);
 
-function compareGraphs(currentGraph, otherGraph){
-	currentArcs = currentGraph.arcs;
-	otherArcs = otherGraph.arcs;
-	//compare each arc of currentGraph with each arc of otherGraph
-	//if enough are similar then consider the graph's similar
-	graphComparisionScore = 0;
-	currentArcs.forEach(function(arc){
-		otherArcs.forEach(functon(otherArc){
-			graphComparisionScore = graphComparisionScore + compareArcs(arc,otherArc);
-		})
-	})
-	if (graphComparisionScore > graphMinimumComparisionScore){
-		return true;
-	}
-	return false;
-}
+	this.journey = journey;
+};
 
-function compareArcs(arc,otherArc){
-	var arcComparisionScore = 0;
-	//Comparing the attributes of the arcs, if they're 
-	
-
-
-	return arcComparisionScore;
-}
-
-
-//build array of similar graphs to our current graph
-var similiarGraphArray = [];
-otherGraphs.forEach(function(graph){
-	if (compareGraphs(currentGraph,graph) === true){
-		similiarGraphArray.push(graph);
+Recommender.prototype.options = {
+	recommendedValues: {
+		danger: {
+			value: 5,
+			weighting: 5
+		},
+		mountain: {
+			value: 5,
+			weighting: 5
+		},
+		fog: {
+			value: 5,
+			weighting: 5
+		},
+		rain: {
+			value: 5,
+			weighting: 5
+		},
+		forest: {
+			value: 5,
+			weighting: 5
+		},
+		water: {
+			value: 5,
+			weighting: 5
+		}
 	}
 };
 
-//go through array of similar graphs and retrieve all the RouteAlgorithm that were computed and get their results
-similiarGraphArray.forEach(function(graph){
-	retrieveRoutesThroughGraph(graph).forEach(function(path){
-		console.log("success");
-	})
-})
+Recommender.prototype.recommend = function() {
+	var self = this
+	,	rank = []
+	;
+
+	this.journey.completedPaths.forEach(function(path) {
+		var hazardValue = self.recommendPath(path);
+		rank[hazardValue] = path;
+	});
+};
+
+Recommender.prototype.recommendPath = function(path) {
+	var total = 0;
+
+	for (var hazard in path.hazards) {
+		total += this.calculateHazard({
+			name: hazard,
+			value: path.hazards[hazard]
+		});
+	}
+
+	return total;
+};
+
+Recommender.prototype.calculateHazard = function(hazard) {
+	var recommendedValue = this.options.recommendedValues[hazard.name].value
+	,	weighting = this.options.recommendedValues[hazard.name].weighting
+	;
+
+	return (Math.abs(recommendedValue - hazard.value)) * weighting;
+};
+
+Recommender.prototype.extend = function(orig, extra) {
+	return Object.keys(extra).forEach(function(key) {
+		orig[key] = extra[key];
+	});
+};
