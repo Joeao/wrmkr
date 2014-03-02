@@ -1,11 +1,7 @@
 <?php
-	var putObj = function($obj) {
+	if($_POST['obj']) {
 		$handle = fopen('./config.json', 'w');
 
-		fwrite($handle, stripslashes($obj));
-	}
-
-	if($_POST['obj']) {
-		putObj($_POST['obj']);
+		fwrite($handle, stripslashes($_POST['obj']));
 	}
 ?>
