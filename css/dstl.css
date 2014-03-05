@@ -134,8 +134,6 @@ html, body, #map_canvas {
 	overflow: scroll;
 	width: 260px;
 }
-.scrollable-menu {
-    height: auto;
-    max-height: 10em;
-    overflow-x: hidden;
+.chosen-container { 
+	width: 150px !important; 
 }

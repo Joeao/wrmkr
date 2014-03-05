@@ -259,21 +259,14 @@ $(document).ready(function() {
 		window.setStart = true;
 		journey.setStartNode(window.selected);
 	});
+	
 
-	// Dropdown menu for hazards
-	$(".dropdown-menu li").click(function(event){
-		var $target = $( event.currentTarget );
- 
-		$target.closest( '.btn-group' )
-				.find( '[data-bind="label"]' ).text( $target.text() )
-				.end()
-				.children( '.dropdown-toggle' ).dropdown( 'toggle' );
-		 
-		return false;
-	})
 	// Adding new hazard
 	$("#hazard_add").click(function() {
-		name = $("#hazard_name").text().toLowerCase();
+		name = $(this).parent().find("span").text().toLowerCase();
+		AddHazard(name);
+	});
+	function AddHazard(name){
 		if(!ExistingHazard(name)) {
 			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
@@ -288,8 +281,7 @@ $(document).ready(function() {
 
 			updateHazards();
 		}
-	});
-
+	}
 	function ExistingHazard(hazard){
 		var existing=false;
 		$("#attributes .attr-name").each(function(index,element){
@@ -333,10 +325,6 @@ $(document).ready(function() {
 		else {
 			window.alert("Error: Must set a start node to simulate");
 		}
-	});
-	//save button clicked
-	$("#save").click(function() {
-		
 	});
 
 
