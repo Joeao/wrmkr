@@ -1,4 +1,4 @@
-DSTL-WarMakr
+DSTL-WarRecommendr
 ============
 
 Usage:
@@ -9,4 +9,4 @@ Usage:
 * Clicking on a path (arrow between nodes), you can set attributes for the path (eg. wind: 4)
 * Click 'Simulate' to run the analysis which will output best paths under various conditions
 
-By Dan Harper, Tom Ardern, Molly Gamble, Etienne Laurent and Robert Berry.
+By Alasdair Smith, Joe Attard-Owen & Adam Hansrod
