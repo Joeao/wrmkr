@@ -45,8 +45,7 @@ $(function() {
         }, this);
 
         if (Object.keys(this.successors).length === 0) {
-            journey.completePath(currentJourney, currentHazards);
-            currentHazards = {}; // Reset hazards after calculating a path
+            journey.completePath(currentJourney, {}); // Reset hazards after calculating a path
         }
     };
 
