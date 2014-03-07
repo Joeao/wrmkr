@@ -263,7 +263,7 @@ $(document).ready(function() {
 
 	// Adding new hazard
 	$("#hazard_add").click(function() {
-		name = $(this).parent().find("span").text().toLowerCase();
+		name = $(this).parent().parent().find('div').find('span').text().toLowerCase();
 		AddHazard(name);
 	});
 	function AddHazard(name){
