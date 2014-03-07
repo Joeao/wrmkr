@@ -25,7 +25,7 @@ $(document).ready(function() {
 		disableDoubleClickZoom: true
 	};
 
-	var map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
+	window.map = new google.maps.Map(document.getElementById('map_canvas'), mapOptions);
 
 	var lineSymbol = {
 		path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW
