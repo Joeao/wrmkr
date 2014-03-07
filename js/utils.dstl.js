@@ -192,7 +192,6 @@ $(function() {
         this.display('Found Journeys:<br>');
         this.display(this.parse_path(completedPath));
 
-
         this.display('Least number of nodes:<br>');
         var least = null;
         _.each(allCompletedPaths, function(path) {
