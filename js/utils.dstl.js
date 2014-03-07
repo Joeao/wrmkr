@@ -1,7 +1,7 @@
 $(function() {
     PathNode = function(id, gMarker) {
         this.id = id;
-        this.successors = [];
+        this.successors = {};
         this.hazards = {};
         this.gMarker = gMarker;
         return this;
@@ -34,6 +34,7 @@ $(function() {
 
         _.each(this.successors, function(successor) {
             var thisHazards = _.clone(currentHazards);
+
             thisHazards = this.calculateHazards(
                 thisHazards
             ,   successor.hazards
@@ -43,8 +44,9 @@ $(function() {
             successor.node.travel(currentJourney.slice(), thisHazards);
         }, this);
 
-        if (this.successors.length === 0) {
+        if (Object.keys(this.successors).length === 0) {
             journey.completePath(currentJourney, currentHazards);
+            currentHazards = {}; // Reset hazards after calculating a path
         }
     };
 
@@ -146,6 +148,7 @@ $(function() {
         this.completedPaths.push(details);
 
         // console.log('one path complete!', journey, hazards);
+        window.recommender = recommender = new Recommender(this);
 
         ui = new UI();
         ui.render(details, this.completedPaths);
