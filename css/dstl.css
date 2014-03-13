@@ -83,7 +83,7 @@ html, body, #map_canvas {
 
 
 /* Global Modal Windows */
-.accordion.global {
+.console.global {
 	max-height: 99%;
 	position: absolute;
 	top: inherit;
@@ -95,25 +95,25 @@ html, body, #map_canvas {
 	background: #FFF;
 	margin:0px;
 }
-	.accordion.global .accordion-group {
+	.console.global .console-group {
 		padding: 5px;
 	}
 
-	.accordion.global h4 {
+	.console.global h4 {
 		float: left;
 	}
 
-	.accordion.global .accordion-toggle {
+	.console.global .console-toggle {
 		float:right;
 	}
 
-	.accordion.global .accordion-body {
+	.console.global .console-body {
 		clear:both;
 	}
 
 
 /* Controls */
-.accordion.global .accordion-inner {
+.console.global .console-inner {
 	padding:5px; padding-top:10px;
 }
 
@@ -123,17 +123,19 @@ html, body, #map_canvas {
 }
 
 /* Output */
-.accordion.global .output {float: left; margin-left:0px;}
-.accordion.global .output pre {
+.console.global .output {float: left; margin-left:0px;}
+.console.global .output pre {
 	clear:both;
 	float: left;
 }
-.accordion.global .data{
+.console.global .data{
 	max-height:600px;
 	min-height:80px;
 	overflow: scroll;
 	width: 260px;
 }
+
+/*Chosen Container*/
 .chosen-container { 
 	width: 150px !important; 
 }

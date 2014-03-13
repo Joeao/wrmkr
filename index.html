@@ -90,34 +90,36 @@
 		</div>
 
 		<!-- Global and reporting controls -->
-		<div class="accordion global" id="accordion">
-			<div class="accordion-group">
-				<div class="accordion-heading">
-				<h4>
-					DSTL WarMakr 
-					<span class="label label-warning">beta</span>
-     			</h4>
-				<a id="accordionToggle" class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
-					<i class="icon-resize-vertical"></i>
-				</a>
+		<div class="console global" id="console">
+			<div class="console-group">
+				<div class="console">
+
+					<div class="console-heading">
+					<h4>
+						DSTL WarMakr 
+						<span class="label label-warning">beta</span>
+	     			</h4>
+
 				</div>
-				<div id="collapseOne" class="accordion-body collapse in">
-					<div class="accordion-inner">
+				<div class="console-body ">
+					<div class="console-inner">
 						<div class="output">
-							<h4>Output</h4>
-							
+							<div class="btn-group">
+								<h4>Output</h4>
 								<a id="start" href="#" class="btn btn-success">Simulate</a>
 								<a id="clear" href="#" class="btn btn-danger">Clear</a>
-
+							</div>
 							<script id="template" type="template"><p><%= data %></p></script>
-							<pre id="data" class="data"> </pre>
+							<pre id="data" class="data"> 
+						
+							</pre>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-
-	</div>
+		<div>
+	<div>
+<div>
 <script type="text/javascript">
     var config = {
       '.chosen-select'           : {},
@@ -130,5 +132,5 @@
       $(selector).chosen(config[selector]);
     }
   </script>
-</body>r
+</body>
 </html>

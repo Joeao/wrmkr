@@ -188,12 +188,12 @@ $(function() {
 
     UI.prototype.render = function(completedPath, allCompletedPaths) {
         this.display('New Path FOUND!<br>');
-
+                                
         this.display('Found Journeys:<br>');
         this.display(this.parse_path(completedPath));
 
-
         this.display('Least number of nodes:<br>');
+        
         var least = null;
         _.each(allCompletedPaths, function(path) {
             // console.log('path here', path);
@@ -224,6 +224,7 @@ $(function() {
             // console.log(hazard_name, lowest);
             this.display(this.parse_path(lowest));
         }, this);
+
     };
 
     UI.prototype.parse_path = function(path) {
