@@ -327,6 +327,11 @@ $(document).ready(function() {
 		}
 	});
 
+	$("#demo").click(function() {
+		var demo = new Simulate();
+		demo.sim();
+	});
+
 
 	// live on change handler as the input boxes aren't
 	// always on the page
