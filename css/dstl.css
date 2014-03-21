@@ -117,10 +117,6 @@ html, body, #map_canvas {
 	padding:5px; padding-top:10px;
 }
 
-#start, #clear{
-	float:right;
-	margin:2px;
-}
 
 /* Output */
 .console.global .output {float: left; margin-left:0px;}

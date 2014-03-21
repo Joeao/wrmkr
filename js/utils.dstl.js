@@ -190,7 +190,6 @@ $(function() {
         for (index in allJourneys.completedPaths){
             this.parse_path(allJourneys.completedPaths[index],index);
         }
-
     };
     UI.prototype.parse_path = function(path,index) {
         // console.log('path', path);        
