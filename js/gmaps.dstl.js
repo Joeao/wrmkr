@@ -346,7 +346,7 @@ $(document).ready(function() {
 			name = $(".attr-name",this).text();
 			value = $("input",this).val();
 
-			newhazards[name] = value;
+			newhazards[name] = parseInt(value, 10);
 		});
 
 		// console.log('update hazards', window.selectedType, window.selected, newhazards);
