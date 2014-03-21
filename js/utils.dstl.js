@@ -29,7 +29,6 @@ $(function() {
     PathNode.prototype.travel = function(currentJourney, hazards) {
         currentJourney = currentJourney || [];
         currentHazards = hazards || this.hazards || {};
-
         currentJourney.push(this);
 
         _.each(this.successors, function(successor) {
@@ -147,11 +146,9 @@ $(function() {
 
         this.completedPaths.push(details);
 
-        // console.log('one path complete!', journey, hazards);
+        //console.log('one path complete!',details);
         window.recommender = recommender = new Recommender(this);
 
-        ui = new UI();
-        ui.render(details, this.completedPaths);
     };
 
     Journey.prototype.start = function(node) {
@@ -160,6 +157,9 @@ $(function() {
         }
 
         this.startNode.travel();
+
+        ui = new UI();  
+        ui.renderer(window.journey);
     };
 
     window.j = journey = new Journey();
@@ -185,50 +185,16 @@ $(function() {
     UI.prototype.display = function(data) {
         $('#data').append( this.template({data: data }) );
     };
-
-    UI.prototype.render = function(completedPath, allCompletedPaths) {
-        this.display('New Path FOUND!<br>');
-                                
-        this.display('Found Journeys:<br>');
-        this.display(this.parse_path(completedPath));
-
-        this.display('Least number of nodes:<br>');
-        
-        var least = null;
-        _.each(allCompletedPaths, function(path) {
-            // console.log('path here', path);
-            if (least === null || path.journey.length < least.journey.length) {
-                least = path;
-            }
-        }, this);
-        this.display(this.parse_path(least));
-
-        var all_hazards = [];
-        _.each(allCompletedPaths, function(path) {
-            _.each(path.hazards, function(value, name) {
-                if ( ! _.contains(all_hazards, name)) {
-                    all_hazards.push(name);
-                }
-            });
-        });
-
-
-        _.each(all_hazards, function(hazard_name) {
-            this.display('Lowest '+ hazard_name +' value:<br>');
-            var lowest = null;
-            _.each(allCompletedPaths, function(path) {
-                if (lowest === null || path.hazards[hazard_name] < lowest.hazards[hazard_name]) {
-                    lowest = path;
-                }
-            }, this);
-            // console.log(hazard_name, lowest);
-            this.display(this.parse_path(lowest));
-        }, this);
+    UI.prototype.renderer = function(allJourneys) {
+        console.log(allJourneys.completedPaths);
+        for (index in allJourneys.completedPaths){
+            this.parse_path(allJourneys.completedPaths[index],index);
+        }
 
     };
-
-    UI.prototype.parse_path = function(path) {
-        // console.log('path', path);
-        return '<b>'+_.pluck(path.journey, 'id')+'</b> ' + JSON.stringify(path.hazards);
+    UI.prototype.parse_path = function(path,index) {
+        // console.log('path', path);        
+        this.display('Found Journey:<br>');
+        this.display('<b>'+_.pluck(path.journey, 'id')+'</b> ' + JSON.stringify(path.hazards) + "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-up' > </a>"+ "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-down' > </a>");
     };
 });

@@ -106,7 +106,12 @@
 					<div class="console-inner">
 						<div class="output">
 							<div class="btn-group">
+<<<<<<< Updated upstream
+								<h4>Output</h4>
+							
 								<a id="demo" href="#" class="btn btn-primary">Demo</a>
+=======
+>>>>>>> Stashed changes
 								<a id="start" href="#" class="btn btn-success">Simulate</a>
 								<a id="clear" href="#" class="btn btn-danger">Clear</a>
 							</div>
