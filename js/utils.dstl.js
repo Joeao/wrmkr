@@ -163,7 +163,7 @@ $(function() {
         setTimeout(function() {
             ui = new UI();  
             ui.renderer(window.journey);
-        }, 100);
+        }, 200);
         // Okay, you're safe now :)
     };
 
