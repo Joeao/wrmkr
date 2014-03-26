@@ -1,9 +1,11 @@
 <?php
+	$file = 'config.json';
+
 	if ($_POST['obj']) {
-		$handle = fopen('./config.json', 'w');
+		$data = $_POST['obj'];
 
-		print_r($_POST['obj']);
+		file_put_contents($file, $data);
 
-		fwrite($handle, stripslashes($_POST['obj']));
+		print_r(file_get_contents($file));
 	}
 ?>
