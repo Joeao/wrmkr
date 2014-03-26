@@ -106,7 +106,9 @@ Recommender.prototype.upvote = function(pathId) {
 		};
 	});
 
-	this.update(this.recommendedValues);
+	this.update({
+		hazards: this.recommendedValues
+	});
 };
 
 Recommender.prototype.downvote = function() {
@@ -121,7 +123,9 @@ Recommender.prototype.downvote = function() {
 		};
 	});
 
-	this.update(this.recommendedValues);
+	this.update({
+		hazards: this.recommendedValues
+	});
 };
 
 Recommender.prototype.update = function(data) {

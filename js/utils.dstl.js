@@ -158,8 +158,13 @@ $(function() {
 
         this.startNode.travel();
 
-        ui = new UI();  
-        ui.renderer(window.journey);
+        // WARNING: Nasty, nasty hack ahead
+        // Prevents UI showing before recommender has re-ordered paths
+        setTimeout(function() {
+            ui = new UI();  
+            ui.renderer(window.journey);
+        }, 100);
+        // Okay, you're safe now :)
     };
 
     window.j = journey = new Journey();
