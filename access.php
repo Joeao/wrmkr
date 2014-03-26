@@ -1,7 +1,11 @@
 <?php
-	if($_POST['obj']) {
-		$handle = fopen('./config.json', 'w');
+	$file = 'config.json';
 
-		fwrite($handle, stripslashes($_POST['obj']));
+	if ($_POST['obj']) {
+		$data = $_POST['obj'];
+
+		file_put_contents($file, $data);
+
+		print_r(file_get_contents($file));
 	}
 ?>

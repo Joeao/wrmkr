@@ -379,4 +379,14 @@ $(document).ready(function() {
 			$("#attributes").append(inputCopy);
 		});
 	}
+
+	$('#console').on('click', '.thumbs-up', function(e) {
+		var path = $(this).data('path');
+
+		recommender.upvote(path);
+	});
+
+	$('#console').on('click', '.thumbs-down', function(e) {
+		var path = $(this).data('path');
+	});
 });

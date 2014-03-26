@@ -25,7 +25,10 @@ Recommender.prototype.options = {
 		boats: 5,
 		sharks: 5,
 		wind: 5
-	}
+	},
+
+	uploadUrl: 'access.php',
+	uploadMethod: 'post',
 };
 
 Recommender.prototype.fetchRecommendedValues = function(callback) {
@@ -88,5 +91,55 @@ Recommender.prototype.sort = function(arr) {
 Recommender.prototype.extend = function(orig, extra) {
 	return Object.keys(extra).forEach(function(key) {
 		orig[key] = extra[key];
+	});
+};
+
+Recommender.prototype.upvote = function(pathId) {
+	var self = this
+	,	path = window.journey.completedPaths[pathId]
+	,	hazards = Object.keys(path.hazards)
+	;
+
+	hazards.forEach(function(hazardName) {
+		self.recommendedValues[hazardName] = {
+			value: self.recommendedValues[hazardName].value + 10
+		};
+	});
+
+	this.update({
+		hazards: this.recommendedValues
+	});
+};
+
+Recommender.prototype.downvote = function() {
+	var self = this
+	,	path = window.journey.completedPaths[pathId]
+	,	hazards = Object.keys(path.hazards)
+	;
+
+	hazards.forEach(function(hazardName) {
+		self.recommendedValues[hazardName] = {
+			value: self.recommendedValues[hazardName].value - 10
+		};
+	});
+
+	this.update({
+		hazards: this.recommendedValues
+	});
+};
+
+Recommender.prototype.update = function(data) {
+	$.ajax({
+		url: this.options.uploadUrl,
+		type: this.options.uploadMethod,
+		data: {
+			obj: JSON.stringify(data)
+		},
+		success: function(data, status) {
+			console.log('succ', data);
+		},
+		error: function() {
+			console.log('err');
+		}
 	});
 };
