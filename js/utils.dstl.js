@@ -158,8 +158,13 @@ $(function() {
 
         this.startNode.travel();
 
-        ui = new UI();  
-        ui.renderer(window.journey);
+        // WARNING: Nasty, nasty hack ahead
+        // Prevents UI showing before recommender has re-ordered paths
+        setTimeout(function() {
+            ui = new UI();  
+            ui.renderer(window.journey);
+        }, 200);
+        // Okay, you're safe now :)
     };
 
     window.j = journey = new Journey();
@@ -186,13 +191,13 @@ $(function() {
         $('#data').append( this.template({data: data }) );
     };
     UI.prototype.renderer = function(allJourneys) {
-        console.log(allJourneys.completedPaths);
-        for (index in allJourneys.completedPaths){
+        // console.log(allJourneys.completedPaths);
+        for (var index in allJourneys.completedPaths) {
             this.parse_path(allJourneys.completedPaths[index],index);
         }
     };
     UI.prototype.parse_path = function(path,index) {
-        // console.log('path', path);        
+        // console.log('path', path);
         this.display('Found Journey:<br>');
         this.display( "<span data='"+index+"' onmouseover='highlightJourney(this)'>"
                      + "<b>"+_.pluck(path.journey, "id")+"</b>"
@@ -200,5 +205,6 @@ $(function() {
                      + "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-up' > </a>"
                      + "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-down' > </a>"
                      + "</span>");
+        this.display('<b>'+_.pluck(path.journey, 'id')+'</b> ' + JSON.stringify(path.hazards) + "<a href='#' data-path='" + index + "' class='thumbs-up'> <span class='glyphicon glyphicon-thumbs-up' > </a>"+ "<a href='#' data-path='" + index + "' class='thumbs-down'> <span class='glyphicon glyphicon-thumbs-down' > </a>");
     };
 });
