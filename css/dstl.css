@@ -89,7 +89,7 @@ html, body, #map_canvas {
 	top: inherit;
 	bottom: 0px;
 	left: 0px;
-	width: 300px;
+	width: 250px;
 	border-bottom: 0px;
 	border-radius: 5px 5px 0px 0px;
 	background: #FFF;
@@ -134,4 +134,7 @@ html, body, #map_canvas {
 /*Chosen Container*/
 .chosen-container { 
 	width: 150px !important; 
+}
+.btn-group{
+	padding:0.25em;
 }

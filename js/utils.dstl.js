@@ -194,6 +194,11 @@ $(function() {
     UI.prototype.parse_path = function(path,index) {
         // console.log('path', path);        
         this.display('Found Journey:<br>');
-        this.display('<b>'+_.pluck(path.journey, 'id')+'</b> ' + JSON.stringify(path.hazards) + "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-up' > </a>"+ "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-down' > </a>");
+        this.display( "<span data='"+index+"' onmouseover='highlightJourney(this)'>"
+                     + "<b>"+_.pluck(path.journey, "id")+"</b>"
+                     + JSON.stringify(path.hazards) 
+                     + "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-up' > </a>"
+                     + "<a href='#"+index+"'> <span class='glyphicon glyphicon-thumbs-down' > </a>"
+                     + "</span>");
     };
 });
