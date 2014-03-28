@@ -384,9 +384,29 @@ $(document).ready(function() {
 		var path = $(this).data('path');
 
 		recommender.upvote(path);
+
+		// WARNING: Nasty, nasty hack ahead
+        // Prevents UI from showing before recommender has re-ordered paths
+        setTimeout(function() {
+            $('#data p').empty();
+
+            ui = new UI();  
+            ui.renderer(window.journey);
+        }, 200);
+        // Okay you're safe now :)
 	});
 
 	$('#console').on('click', '.thumbs-down', function(e) {
 		var path = $(this).data('path');
+
+		// WARNING: Nasty, nasty hack ahead
+        // Prevents UI from showing before recommender has re-ordered paths
+        setTimeout(function() {
+            $('#data p').empty();
+
+            ui = new UI();  
+            ui.renderer(window.journey);
+        }, 200);
+        // Okay you're safe now :)
 	});
 });

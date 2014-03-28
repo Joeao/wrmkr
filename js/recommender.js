@@ -102,7 +102,7 @@ Recommender.prototype.upvote = function(pathId) {
 
 	hazards.forEach(function(hazardName) {
 		self.recommendedValues[hazardName] = {
-			value: self.recommendedValues[hazardName].value + 10
+			value: self.recommendedValues[hazardName].value - 10
 		};
 	});
 
@@ -119,7 +119,7 @@ Recommender.prototype.downvote = function() {
 
 	hazards.forEach(function(hazardName) {
 		self.recommendedValues[hazardName] = {
-			value: self.recommendedValues[hazardName].value - 10
+			value: self.recommendedValues[hazardName].value + 10
 		};
 	});
 
@@ -129,6 +129,8 @@ Recommender.prototype.downvote = function() {
 };
 
 Recommender.prototype.update = function(data) {
+	var self = this;
+
 	$.ajax({
 		url: this.options.uploadUrl,
 		type: this.options.uploadMethod,
@@ -137,9 +139,19 @@ Recommender.prototype.update = function(data) {
 		},
 		success: function(data, status) {
 			console.log('succ', data);
+
+			self.resort(JSON.parse(data));
 		},
 		error: function() {
 			console.log('err');
 		}
 	});
+};
+
+Recommender.prototype.resort = function(recommendedValues) {
+	this.recommendedValues = recommendedValues.hazards;
+
+	// console.log('before', this.journey.completedPaths);
+	this.recommend();
+	// console.log('after', this.journey.completedPaths);
 };
