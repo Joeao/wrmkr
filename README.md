@@ -1,6 +1,11 @@
 DSTL-WarRecommendr
 ============
 
+Installation: 
+
+* Clone down `git clone git@github.com:Joeao/wrmkr.git`
+* Run `chmod o+w config.json`
+
 Usage:
 
 * Double-click to set nodes
