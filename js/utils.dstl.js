@@ -147,7 +147,7 @@ $(function() {
         // WARNING: Nasty, nasty hack ahead
         // Prevents UI from showing before recommender has re-ordered paths
         setTimeout(function() {
-            ui = new UI();  
+            var ui = new UI();
             ui.renderer(window.journey);
         }, 200);
     };

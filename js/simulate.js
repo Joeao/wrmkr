@@ -4,6 +4,7 @@ Simulate = function(options) {
 };
 
 Simulate.prototype.options = {
+	//Add more to this if you want to expand the default simulation
 	points: [
 		{
 			lat: -34.08,

@@ -4,7 +4,7 @@ window.selected = null; //Select node as shown by gui
 window.$viewer = {};
 window.allLines = [];
 window.end  = null;
-window.startDrawMarker; //Start draw marker from here
+window.startDrawMarker = null; //Start draw marker from here
 
 $(document).ready(function() {
 	var counter = 0;
@@ -263,7 +263,7 @@ $(document).ready(function() {
 
 	// Adding new hazard
 	$("#hazard_add").click(function() {
-		name = $(this).parent().parent().find('div').find('span').text().toLowerCase();
+		var name = $(this).parent().parent().find('div').find('span').text().toLowerCase();
 		AddHazard(name);
 	});
 	function AddHazard(name){
@@ -295,8 +295,8 @@ $(document).ready(function() {
 	//Delete line button clicked
 	$("#delete").click(function() {
 		if (window.selected !== null && "pathOrder" in window.selected) {
-			connectedNodeA = window.selected.pathOrder[0];  
-			connectedNodeB = window.selected.pathOrder[1];
+			var connectedNodeA = window.selected.pathOrder[0];  
+			var connectedNodeB = window.selected.pathOrder[1];
 
 			// console.log("Deleted connection between nodes " + connectedNodeA.id + " and " + connectedNodeB.id);
 
@@ -343,8 +343,8 @@ $(document).ready(function() {
 		newhazards = {};
 		$(".hazard").each(function(){
 
-			name = $(".attr-name",this).text();
-			value = $("input",this).val();
+			var name = $(".attr-name",this).text();
+			var value = $("input",this).val();
 
 			newhazards[name] = parseInt(value, 10);
 		});
@@ -369,7 +369,7 @@ $(document).ready(function() {
 
 		$("#attributes").html("");
 		$.each(hazards, function(key, value) {
-			name = $("#hazard_name").val();
+			var name = $("#hazard_name").val();
 
 			inputCopy = $("#form").clone().attr("id","").removeClass("hide").addClass("hazard");
 
