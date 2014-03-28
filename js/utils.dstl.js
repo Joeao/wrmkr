@@ -71,20 +71,6 @@ $(function() {
         }, this);
 
         // console.log('calculatedPathHazards', calculatedPathHazards, currentHazards);
-
-        // NODE HAZARDS ARE NOT CALCULATED!!!
-
-        // _.each(nodeHazards, function(value, name) {
-        //  if (calculatedPathHazards.hasOwnProperty(name)) {
-        //      var xpp2 = Mediate(name, calculatedPathHazards[name], value, calculatedPathHazards, pathHazards);
-        //      console.log('xpp2', xpp2);
-        //      calculatedPathHazards[name] = xpp2;
-        //  }
-        //  else {
-        //      calculatedPathHazards[name] = value;
-        //  }
-        // }, this);
-
         return _.defaults(calculatedPathHazards, currentHazards);
     };
 
@@ -161,7 +147,7 @@ $(function() {
         // WARNING: Nasty, nasty hack ahead
         // Prevents UI from showing before recommender has re-ordered paths
         setTimeout(function() {
-            ui = new UI();  
+            var ui = new UI();
             ui.renderer(window.journey);
         }, 200);
     };

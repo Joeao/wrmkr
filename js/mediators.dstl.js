@@ -45,7 +45,6 @@ Mediate = function(name, allHazards, pathHazards, valueSoFar, currentValue) {
 					ratio = 0.1;
 				if (currentValue > 3500) // >3500 miles
 					ratio = 0;
-			   
 				return {
 					mountain: valueSoFar + currentValue,
 					oxygen: Math.floor(allHazards.oxygen * ratio)
@@ -73,7 +72,6 @@ Mediate = function(name, allHazards, pathHazards, valueSoFar, currentValue) {
 					ratio = 0.2;
 				if (currentValue == 100) // =100%
 					ratio = 0;
-			   
 				return {
 					fog: valueSoFar + currentValue,
 					cars: Math.floor(allHazards.cars * ratio) //remaining cars
@@ -99,7 +97,6 @@ Mediate = function(name, allHazards, pathHazards, valueSoFar, currentValue) {
 					ratio = 0.2;
 				if (currentValue == 100) // =100%
 					ratio = 0;
-			   
 				return {
 					rain: valueSoFar + currentValue,
 					cars: Math.floor(allHazards.camouflage * ratio) //remaining camouflage
