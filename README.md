@@ -1,4 +1,4 @@
-DSTL-WarRecommendr
+WarRecommendr
 ============
 
 Installation: 
