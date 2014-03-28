@@ -198,7 +198,7 @@ $(function() {
     UI.prototype.parse_path = function(path,index) {
         // console.log('path', path);        
         this.display('Found Journey:<br>');
-        this.display( "<span data='"+index+"' onmouseover='highlightJourney(this)'>" +
+        this.display( "<span data='"+index+"'>" +
                     "<b>"+_.pluck(path.journey, "id")+"</b>" +
                     JSON.stringify(path.hazards) +
                     "<a href='#' data-path='" + index + "' class='thumbs-up'> <span class='glyphicon glyphicon-thumbs-up' > </a>" +
